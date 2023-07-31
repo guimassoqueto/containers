@@ -8,6 +8,8 @@ The following microservices are integrated with postgres and RabbitMQ
 3. [Scrap Puppet](https://github.com/guimassoqueto/scrap-puppet)
 4. [Scrap Flask](https://github.com/guimassoqueto/scrap-flask)
 
+
+## How to run
 1. create .env
 ```shell
 make env
