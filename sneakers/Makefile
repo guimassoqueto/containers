@@ -1,5 +1,5 @@
 env:
-	cat .env.sample 1> .env
+	cp .env.sample .env
 
 up:
 	docker compose up -d
