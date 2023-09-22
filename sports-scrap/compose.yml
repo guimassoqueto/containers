@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   postgres:
-    container_name: sneakers
+    container_name: db
     image: postgres:alpine
     restart: always
     networks:
@@ -32,6 +32,24 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  rabbitmq:
+    image: rabbitmq:3.13-rc-management
+    container_name: scrap-rabbitmq
+    restart: on-failure
+    healthcheck:
+      start_period: 60s
+      timeout: 120s
+      interval: 30s
+      test: ifconfig | grep broadcast
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - local
 
 networks:
   local:
